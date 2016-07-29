@@ -1,0 +1,14 @@
+{
+  "name": "regx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "babel-node ./src/regx.spec.js" 
+  },
+  "author": "MSC",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.11.4"
+  }
+}
