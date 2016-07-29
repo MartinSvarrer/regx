@@ -1,4 +1,4 @@
-import { startWith, text, nonOf, anyChar, maybe, endWith } from './regx';
+const { startWith, text, nonOf, anyChar, maybe, endWith } = require('./regx');
 
 /*
   URL validation regex

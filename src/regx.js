@@ -1,7 +1,7 @@
 // helpers
 function then(value) {
     return function (regx) {
-        const newValue = value + regx._value;
+        const newValue = `(${value}${regx._value})`;
 
         return {
             _value: newValue,
@@ -64,4 +64,4 @@ function maybe(regx) {
     }
 }
 
-export { startWith, text, nonOf, anyChar, maybe, endWith };
+module.exports = { startWith, text, nonOf, anyChar, maybe, endWith };
