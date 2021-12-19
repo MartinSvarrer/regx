@@ -1,16 +1,39 @@
 # regx
-A human readable search pattern builder
 
-following regx:
+A human readable RegExp builder for JavaScript.
+
+NOTE: This is just a simple prototype/concept.
+
+Example Regx:
 
 ```js
-var regx = startWith(text('http').or('https'))
-  .then(text('://'))
-  .then(nonOf('\s/$.?#'))
-  .then(anyChar())
-  .then(endWith(maybe(nonOf('\s'))));
+const urlValidation = startWith(text("http").or("https").or("ftp"))
+    .then(text("://"))
+    .then(endWith(oneOrMore(anyCharExcept(" ", '"'))));
+
+console.assert(urlValidation.test("http://www.google.com"));
 ```
 
-is the equivalent of:
+vs RegExp:
 
-`^(https?|ftp)(://)([^\s/$.?#])(.)([^\s]*$)`
+```js
+const simpleUrlValidation = /^(ftp|http|https):\/\/[^ "]+$/;
+console.assert(urlValidation.test("http://www.google.com"));
+```
+
+You can also assign parts of the regx to make it even more readable:
+
+```js
+const space = " ";
+const doubleQuote = '"';
+const knownProtocolName = text("http").or("https").or("ftp");
+const freeOfSpacesAndDoubleQuotes = oneOrMore(
+    anyCharExcept(space, doubleQuote)
+);
+
+const urlValidation = startWith(knownProtocolName)
+    .then(text("://"))
+    .then(endWith(freeOfSpacesAndDoubleQuotes));
+
+console.assert(urlValidation.test("http://www.google.com"));
+```
